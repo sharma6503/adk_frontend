@@ -30,15 +30,16 @@ jobs:
       # 4. Build and push Docker image
       - name: Build Docker image
         run: |
-          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend:latest"
+          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend-git:latest"
           gcloud builds submit app/ --tag $IMAGE
 
       # 5. Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
-          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend:latest"
-          gcloud run deploy adk-backend \
+          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend-git:latest"
+          gcloud run deploy adk-backend-git \
             --image $IMAGE \
             --region us-central1 \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --set-env-vars "APP_NAME=${{ secrets.APP_NAME }},DB_NAME=${{ secrets.DB_NAME }},DD_API_KEY=${{ secrets.DD_API_KEY }},DD_SITE=${{ secrets.DD_SITE }},DD_TRACE_ENABLED=${{ secrets.DD_TRACE_ENABLED }},GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }},GOOGLE_CLOUD_LOCATION=${{ secrets.GOOGLE_CLOUD_LOCATION }},GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }},GOOGLE_CLOUD_STAGING_BUCKET=${{ secrets.GOOGLE_CLOUD_STAGING_BUCKET }},GOOGLE_GENAI_USE_VERTEXAI=${{ secrets.GOOGLE_GENAI_USE_VERTEXAI }}"
