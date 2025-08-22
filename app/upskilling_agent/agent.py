@@ -81,6 +81,7 @@ def update_employee_data(
     }
 
     msg = update_employee_details(updated_employee)
+    print(f"Updated employee data: {updated_employee}")
     return {"status": "success", "message": msg}
 
 @llm_obs(name='show_employee_data',component_type='tool',model='gemini-2.5-pro'
