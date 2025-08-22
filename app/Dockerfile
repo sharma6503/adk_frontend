@@ -26,5 +26,5 @@ ENV PORT=8080
 # Expose the port
 EXPOSE 8080
 
-# Adjust this command based on your actual application
-CMD ["python", "agent_engine_app.py"]
+
+CMD ["adk", "run", "--host", "0.0.0.0", "--port", "8080"]
