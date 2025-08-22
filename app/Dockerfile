@@ -1,21 +1,25 @@
-# ---- Base Image ----
+# Use a lightweight Python image
 FROM python:3.11-slim
 
-# ---- Set working directory ----
+# Install system deps
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set workdir
 WORKDIR /app
 
-# ---- Copy and install Python dependencies ----
-# Copies requirements.txt from the repo root
-COPY requirements.txt ./
+# Copy dependency list first (for caching)
+COPY requirements.txt .
+
+# Install Python deps
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ---- Copy all project files from the 'app' directory ----
-# Copies your Python code into the container
-COPY ./app .
+# Copy the rest of the code
+COPY . .
 
-# ---- Expose Port ----
+# Cloud Run requires PORT=8080
 ENV PORT=8080
-ENV HOST=0.0.0.0
 
-# ---- Run app ----
+# If ADK has a runner, use this
 CMD ["adk", "run", "--host", "0.0.0.0", "--port", "8080"]
