@@ -22,9 +22,10 @@ WORKDIR /nextjs
 COPY --from=builder /nextjs/.next ./.next
 COPY --from=builder /nextjs/node_modules ./node_modules
 COPY --from=builder /nextjs/package*.json ./
+COPY --from=builder /nextjs/public ./public
 
-# Expose port 3000
-EXPOSE 3000
+# Cloud Run requires the container to listen on $PORT
+EXPOSE 8080
 
-# Start Next.js server
-CMD ["npm", "start"]
+# Start Next.js on the Cloud Run port
+CMD ["sh", "-c", "npm run start -- -p ${PORT}"]
