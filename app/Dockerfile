@@ -26,5 +26,5 @@ ENV PORT=8080
 # Expose the port
 EXPOSE 8080
 
-
-CMD ["adk", "run", "--host", "0.0.0.0", "--port", "8080"]
+# Start ADK web server
+CMD ["adk", "web", "--host", "0.0.0.0", "--port", "8080"]
