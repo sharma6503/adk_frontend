@@ -18,14 +18,14 @@ FROM node:20-alpine
 
 WORKDIR /nextjs
 
-# Copy only build artifacts + dependencies
+# Copy build artifacts + dependencies
 COPY --from=builder /nextjs/.next ./.next
 COPY --from=builder /nextjs/node_modules ./node_modules
 COPY --from=builder /nextjs/package*.json ./
 # COPY --from=builder /nextjs/public ./public
 
-# Cloud Run requires the container to listen on $PORT
+# Cloud Run requires listening on $PORT
 EXPOSE 8080
 
-# Start Next.js on the Cloud Run port
-CMD ["sh", "-c", "npm run start -- -p ${PORT}"]
+# Start Next.js on Cloud Run
+CMD ["sh", "-c", "npm run start -- -p $PORT -H 0.0.0.0"]
