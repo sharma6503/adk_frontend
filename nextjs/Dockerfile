@@ -22,7 +22,7 @@ WORKDIR /nextjs
 COPY --from=builder /nextjs/.next ./.next
 COPY --from=builder /nextjs/node_modules ./node_modules
 COPY --from=builder /nextjs/package*.json ./
-COPY --from=builder /nextjs/public ./public
+# COPY --from=builder /nextjs/public ./public
 
 # Cloud Run requires the container to listen on $PORT
 EXPOSE 8080
