@@ -3,7 +3,7 @@ name: Deploy Backend to Cloud Run
 on:
   push:
     branches:
-      - main   # change to your deployment branch
+      - main
 
 jobs:
   deploy:
@@ -14,30 +14,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Set up gcloud CLI
+      # 2. Authenticate with service account
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+      # 3. Set up gcloud CLI
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
           install_components: gke-gcloud-auth-plugin
-          
-      # 3. Recreate Service Account key file
-      - name: Create service account key
-        run: |
-          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > ${{ github.workspace }}/service-account.json
-          export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/service-account.json"
 
-      # 4. Authenticate gcloud
-      - name: Authenticate with service account
-        run: gcloud auth activate-service-account --key-file="${{ github.workspace }}/service-account.json"
-
-      # 5. Build and push container image
+      # 4. Build and push Docker image
       - name: Build Docker image
         run: |
           IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend:latest"
           gcloud builds submit --tag $IMAGE
 
-      # 6. Deploy to Cloud Run with environment variables
+      # 5. Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend:latest"
