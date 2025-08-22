@@ -30,7 +30,7 @@ export function ChatHeader(): React.JSX.Element {
           </div>
           <div>
             <h1 className="text-lg font-semibold text-slate-100">
-              Goal Planning Assistant
+              Upskilling Assistant
             </h1>
             <p className="text-xs text-slate-400">Powered by Google Gemini</p>
           </div>

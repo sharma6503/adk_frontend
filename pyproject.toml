@@ -11,8 +11,9 @@ authors = [
     {name = "Brandon Hancock", email = "brandon@brandonhancock.io"},
 ]
 dependencies = [
+    "ddtrace>=3.12.2",
     "google-adk==1.6.1",
-    "python-dotenv",  
+    "python-dotenv",
 ]
 
 requires-python = ">=3.10,<3.13"

@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Agent Chat",
-  description: "Chat with AI agents powered by Google Gemini",
+  title: "Upskilling Agent",
+  description: "Upskilling Agent powered by Google Gemini",
   icons: {
     icon: "/favicon.ico",
   },
