@@ -31,7 +31,7 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-backend:latest"
-          gcloud builds submit --tag $IMAGE
+          gcloud builds submit app/ --tag $IMAGE
 
       # 5. Deploy to Cloud Run
       - name: Deploy to Cloud Run
