@@ -9,15 +9,13 @@ RUN apt-get update && apt-get install -y \
 # Set workdir
 WORKDIR /app
 
-# Copy the entire project first to access requirements.txt
-COPY . .
-
-# Then install dependencies (this will still use Docker layer caching effectively)
-# Alternatively, if requirements.txt is in a specific subdirectory:
-# COPY path/to/requirements.txt .
-
-# Install Python deps
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies directly
+RUN pip install --no-cache-dir \
+    google-adk \
+    ddtrace \
+    requests \
+    python-dotenv
+    # Add other dependencies your project needs
 
 # Copy the rest of the code
 COPY . .
@@ -28,6 +26,5 @@ ENV PORT=8080
 # Expose the port
 EXPOSE 8080
 
-# If ADK has a runner, use this
-# Make sure this command is correct for your application
-CMD ["adk", "run", "--host", "0.0.0.0", "--port", "8080"]
+# Adjust this command based on your actual application
+CMD ["python", "agent_engine_app.py"]
