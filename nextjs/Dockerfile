@@ -27,5 +27,5 @@ COPY --from=builder /nextjs/package*.json ./
 # Cloud Run requires listening on $PORT
 EXPOSE 8080
 
-# Start Next.js on Cloud Run
 CMD ["sh", "-c", "npm run start -- -p $PORT -H 0.0.0.0"]
+
