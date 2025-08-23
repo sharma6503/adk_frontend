@@ -42,4 +42,4 @@ jobs:
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated \
-            --set-env-vars "NEXT_PUBLIC_CLOUD_RUN_SERVICE_URL=${{ secrets.CLOUD_RUN_SERVICE_URL }},GOOGLE_CLOUD_LOCATION=${{ secrets.GOOGLE_CLOUD_LOCATION }},GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }},GOOGLE_CLOUD_STAGING_BUCKET=${{ secrets.GOOGLE_CLOUD_STAGING_BUCKET }},GOOGLE_GENAI_USE_VERTEXAI=${{ secrets.GOOGLE_GENAI_USE_VERTEXAI }}"
+            --set-env-vars "GOOGLE_CLOUD_LOCATION=${{ secrets.GOOGLE_CLOUD_LOCATION }},GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }},GOOGLE_CLOUD_STAGING_BUCKET=${{ secrets.GOOGLE_CLOUD_STAGING_BUCKET }},GOOGLE_GENAI_USE_VERTEXAI=${{ secrets.GOOGLE_GENAI_USE_VERTEXAI }}"
