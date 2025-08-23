@@ -27,11 +27,30 @@ export function MessageArea(): React.JSX.Element {
 
   const [copiedMessageId, setCopiedMessageId] = useState<string | null>(null);
 
-  const handleCopy = async (text: string, messageId: string): Promise<void> => {
-    await navigator.clipboard.writeText(text);
+const handleCopy = async (text: string, messageId: string): Promise<void> => {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      // fallback for insecure context or older browsers
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed"; // avoid scrolling
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+    }
+
     setCopiedMessageId(messageId);
     setTimeout(() => setCopiedMessageId(null), 2000);
-  };
+  } catch (err) {
+    console.error("Copy failed:", err);
+  }
+};
+
+
 
   return (
     <div className="flex flex-col h-full">
