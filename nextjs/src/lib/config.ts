@@ -64,6 +64,7 @@ function getBackendUrl(): string {
     case "cloud_run":
       // Cloud Run deployment - use the service URL
       if (process.env.CLOUD_RUN_SERVICE_URL) {
+        console.log("Using Cloud Run service URL:", process.env.CLOUD_RUN_SERVICE_URL); 
         return process.env.CLOUD_RUN_SERVICE_URL;
       }
       break;
