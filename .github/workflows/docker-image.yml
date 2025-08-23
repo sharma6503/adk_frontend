@@ -1,0 +1,45 @@
+name: Deploy Frontend to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Authenticate with service account
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+      # 3. Set up gcloud CLI
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          install_components: gke-gcloud-auth-plugin
+
+      # 4. Build and push Docker image
+      - name: Build Docker image
+        run: |
+          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-frontend-aug23:latest"
+          gcloud builds submit nextjs/ --tag $IMAGE
+
+      # 5. Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE="gcr.io/${{ secrets.GOOGLE_CLOUD_PROJECT }}/adk-frontend-aug23:latest"
+          gcloud run deploy adk-frontend-aug23 \
+            --image $IMAGE \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars "CLOUD_RUN_SERVICE_URL=${{ secrets.CLOUD_RUN_SERVICE_URL }},GOOGLE_CLOUD_LOCATION=${{ secrets.GOOGLE_CLOUD_LOCATION }},GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }},GOOGLE_CLOUD_STAGING_BUCKET=${{ secrets.GOOGLE_CLOUD_STAGING_BUCKET }},GOOGLE_GENAI_USE_VERTEXAI=${{ secrets.GOOGLE_GENAI_USE_VERTEXAI }}"
