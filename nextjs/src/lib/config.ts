@@ -37,7 +37,7 @@ function detectDeploymentType(): EndpointConfig["deploymentType"] {
   }
 
   // Check for Cloud Run deployment
-  if (process.env.K_SERVICE || process.env.CLOUD_RUN_SERVICE) {
+  if (process.env.K_SERVICE || process.env.CLOUD_RUN_SERVICE || process.env.CLOUD_RUN_SERVICE_URL) {
     return "cloud_run";
   }
 

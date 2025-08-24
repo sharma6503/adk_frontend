@@ -1,5 +1,19 @@
 {
+  "name": "adk-frontend",
+  "version": "1.0.0",
+  "description": "ADK Frontend with CloudRun backend support",
+  "scripts": {
+    "setup-cloudrun": "node setup-cloudrun.js",
+    "test-config": "node test-config.js",
+    "dev": "cd nextjs && npm run dev",
+    "build": "cd nextjs && npm run build",
+    "start": "cd nextjs && npm start",
+    "install-deps": "cd nextjs && npm install"
+  },
   "dependencies": {
     "make-cli": "^5.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^17.2.1"
   }
 }

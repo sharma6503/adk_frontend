@@ -42,4 +42,9 @@ jobs:
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated \
-            --set-env-vars "GOOGLE_CLOUD_LOCATION=${{ secrets.GOOGLE_CLOUD_LOCATION }},GOOGLE_CLOUD_PROJECT=${{ secrets.GOOGLE_CLOUD_PROJECT }},GOOGLE_CLOUD_STAGING_BUCKET=${{ secrets.GOOGLE_CLOUD_STAGING_BUCKET }},GOOGLE_GENAI_USE_VERTEXAI=${{ secrets.GOOGLE_GENAI_USE_VERTEXAI }}"
+            --port 8080 \
+            --memory 1Gi \
+            --cpu 1 \
+            --max-instances 10 \
+            --timeout 900s \
+            --set-env-vars "CLOUD_RUN_SERVICE_URL=${{ secrets.CLOUD_RUN_BACKEND_URL }},ADK_APP_NAME=${{ secrets.ADK_APP_NAME }},NODE_ENV=production"
