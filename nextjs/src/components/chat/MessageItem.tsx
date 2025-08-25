@@ -117,7 +117,7 @@ export function MessageItem({
           <Bot className="h-4 w-4 text-white" />
         </div>
 
-        <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg">
+        <div className="flex-1 bg-gradient-to-br from-card to-muted border border-border rounded-2xl rounded-tl-sm p-4 shadow-lg">
           {/* Activity Timeline during thinking */}
           {hasTimelineEvents && (
             <ActivityTimeline
@@ -128,15 +128,15 @@ export function MessageItem({
 
           {/* Show content if it exists while loading */}
           {message.content && (
-            <div className="prose prose-invert max-w-none mb-3">
+            <div className="prose prose-slate max-w-none dark:prose-invert text-emerald-800 dark:text-slate-100 mb-3">
               <MarkdownRenderer content={message.content} />
             </div>
           )}
 
           {/* Loading indicator */}
-          <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2">
+          <div className="flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-3 py-2">
             <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
-            <span className="text-sm text-slate-400">
+            <span className="text-sm text-muted-foreground">
               {message.content
                 ? "🚀 Still processing..."
                 : "🤔 Thinking and planning..."}
@@ -157,15 +157,15 @@ export function MessageItem({
             <Bot className="h-4 w-4 text-white" />
           </div>
 
-          <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg">
+          <div className="flex-1 bg-gradient-to-br from-card to-muted border border-border rounded-2xl rounded-tl-sm p-4 shadow-lg">
             <ActivityTimeline
               processedEvents={messageEvents.get(message.id) || []}
               isLoading={isLoading}
             />
 
             {/* Show thinking indicator */}
-            <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2 mt-2">
-              <span className="text-sm text-slate-400">🤔 Thinking...</span>
+            <div className="flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-3 py-2 mt-2">
+              <span className="text-sm text-muted-foreground">🤔 Thinking...</span>
             </div>
           </div>
         </div>
@@ -178,8 +178,8 @@ export function MessageItem({
         <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
           <Bot className="h-4 w-4 text-white" />
         </div>
-        <div className="flex items-center gap-2 bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2">
-          <span className="text-sm text-slate-400">No content</span>
+        <div className="flex items-center gap-2 bg-muted/50 border border-border rounded-lg px-3 py-2">
+          <span className="text-sm text-muted-foreground">No content</span>
         </div>
       </div>
     );
@@ -192,7 +192,7 @@ export function MessageItem({
         <Bot className="h-4 w-4 text-white" />
       </div>
 
-      <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg relative group">
+      <div className="flex-1 bg-gradient-to-br from-card to-muted border border-border rounded-2xl rounded-tl-sm p-4 shadow-lg relative group">
         {/* Activity Timeline */}
         {messageEvents && messageEvents.has(message.id) && (
           <ActivityTimeline
@@ -202,7 +202,7 @@ export function MessageItem({
         )}
 
         {/* Message content */}
-        <div className="prose prose-invert max-w-none">
+        <div className="prose prose-slate max-w-none dark:prose-invert text-emerald-800 dark:text-slate-100">
           <MarkdownRenderer content={message.content} />
         </div>
 
@@ -210,20 +210,20 @@ export function MessageItem({
         {onCopy && (
           <button
             onClick={() => handleCopy(message.content, message.id)}
-            className="absolute top-3 right-3 p-2 hover:bg-slate-700/50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
+            className="absolute top-3 right-3 p-2 hover:bg-accent rounded-lg transition-colors opacity-0 group-hover:opacity-100"
             title="Copy message"
           >
             {copiedMessageId === message.id ? (
               <CopyCheck className="h-4 w-4 text-emerald-400" />
             ) : (
-              <Copy className="h-4 w-4 text-slate-400 hover:text-slate-300" />
+              <Copy className="h-4 w-4 text-muted-foreground hover:text-foreground" />
             )}
           </button>
         )}
 
         {/* Timestamp */}
-        <div className="mt-3 pt-2 border-t border-slate-700/50">
-          <span className="text-xs text-slate-400">
+        <div className="mt-3 pt-2 border-t border-border">
+          <span className="text-xs text-muted-foreground">
             {message.timestamp.toLocaleTimeString()}
           </span>
         </div>

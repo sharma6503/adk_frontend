@@ -225,15 +225,15 @@ export function SessionSelector({
   return (
     <div className={`${className}`}>
       {!currentUserId ? (
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <MessageSquare className="w-4 h-4" />
           <span>No user set</span>
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">Session:</span>
+          <span className="text-xs text-muted-foreground">Session:</span>
           <Select value={currentSessionId} onValueChange={handleSessionSelect}>
-            <SelectTrigger className="w-44 h-12 text-xs bg-slate-700/50 border-slate-600/50 text-slate-100 hover:bg-slate-600/50 focus:border-emerald-500 px-4 py-1">
+            <SelectTrigger className="w-44 h-12 text-xs bg-card border-border text-foreground hover:bg-card/80 focus:border-emerald-500 px-4 py-1">
               <SelectValue
                 placeholder={
                   isLoadingSessions
@@ -246,10 +246,10 @@ export function SessionSelector({
                 }
               />
             </SelectTrigger>
-            <SelectContent className="bg-slate-800 border-slate-600 min-w-44">
+            <SelectContent className="bg-card border-border min-w-44">
               {/* Loading state */}
               {isLoadingSessions && (
-                <div className="flex items-center gap-2 p-3 text-slate-400">
+                <div className="flex items-center gap-2 p-3 text-muted-foreground">
                   <Loader2 className="w-4 h-4 animate-spin" />
                   <span className="text-sm">Loading active sessions...</span>
                 </div>
@@ -257,7 +257,7 @@ export function SessionSelector({
 
               {/* Error state */}
               {sessionError && !isLoadingSessions && (
-                <div className="flex items-center gap-2 p-3 text-red-400">
+                <div className="flex items-center gap-2 p-3 text-destructive">
                   <AlertCircle className="w-4 h-4" />
                   <span className="text-sm">Failed to load sessions</span>
                 </div>
@@ -270,20 +270,20 @@ export function SessionSelector({
                     <SelectItem
                       key={session.id}
                       value={session.id}
-                      className="text-slate-100 focus:bg-slate-700 focus:text-slate-50 cursor-pointer py-3 px-3"
+                      className="text-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer py-3 px-3"
                     >
                       <div className="flex flex-col items-start w-full min-w-0">
-                        <span className="font-medium text-slate-100 text-sm truncate w-full">
+                        <span className="font-medium text-foreground text-sm truncate w-full">
                           {session.title}
                         </span>
-                        <div className="flex items-center gap-2 text-xs text-slate-300 mt-1">
+                        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-1">
                           <Calendar className="w-3 h-3 flex-shrink-0" />
                           <span className="flex-shrink-0">
                             {formatDate(session.lastActivity)}
                           </span>
                           {session.messageCount !== undefined && (
                             <>
-                              <span className="text-slate-500">•</span>
+                              <span className="text-muted-foreground/50">•</span>
                               <span className="flex-shrink-0">
                                 {session.messageCount} msg
                               </span>
@@ -296,7 +296,7 @@ export function SessionSelector({
                   {/* Create New Session Option */}
                   <SelectItem
                     value="create-new"
-                    className="text-slate-100 focus:bg-slate-700 focus:text-slate-50 border-t border-slate-600 mt-1 cursor-pointer py-3 px-3"
+                    className="text-foreground focus:bg-accent focus:text-accent-foreground border-t border-border mt-1 cursor-pointer py-3 px-3"
                     disabled={isCreatingSession}
                   >
                     <div className="flex items-center gap-2">

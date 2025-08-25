@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
@@ -29,11 +30,12 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
+          storageKey="upskilling-assistant-theme"
         >
           <div className="relative flex min-h-screen flex-col">
             <main className="flex-1">{children}</main>
           </div>
+          <ThemeToggle />
           <Toaster />
         </ThemeProvider>
       </body>

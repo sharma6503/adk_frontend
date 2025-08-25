@@ -146,40 +146,40 @@ export function ActivityTimeline({
 
   const getEventColor = (title: string): string => {
     // Color code different types of events
-    if (title.includes("Function Call")) return "text-blue-400";
-    if (title.includes("Function Response")) return "text-green-400";
+    if (title.includes("Function Call")) return "text-blue-500";
+    if (title.includes("Function Response")) return "text-green-500";
     if (title.includes("Sources") || title.includes("Research"))
-      return "text-purple-400";
+      return "text-purple-500";
     if (title.includes("Planning") || title.includes("Strategy"))
-      return "text-yellow-400";
+      return "text-yellow-500";
     if (title.includes("Processing") || title.includes("Analysis"))
-      return "text-orange-400";
+      return "text-orange-500";
     if (title.includes("Writing") || title.includes("Report"))
-      return "text-pink-400";
+      return "text-pink-500";
     if (title.includes("Thinking") || title.startsWith("🤔"))
-      return "text-cyan-400";
-    return "text-neutral-400";
+      return "text-cyan-500";
+    return "text-muted-foreground";
   };
 
   return (
     <div className="w-full mb-4">
-      <Card className="bg-neutral-900 border-neutral-700">
+      <Card className="bg-card border-border">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-blue-400" />
-              <CardDescription className="text-neutral-300 font-medium">
+              <Activity className="h-5 w-5 text-blue-500" />
+              <CardDescription className="text-foreground font-medium">
                 AI Activity Timeline
               </CardDescription>
             </div>
             <button
               onClick={() => setIsTimelineCollapsed(!isTimelineCollapsed)}
-              className="p-1 hover:bg-neutral-700 rounded transition-colors"
+              className="p-1 hover:bg-accent rounded transition-colors"
             >
               {isTimelineCollapsed ? (
-                <ChevronDown className="h-4 w-4 text-neutral-400" />
+                <ChevronDown className="h-4 w-4 text-muted-foreground" />
               ) : (
-                <ChevronUp className="h-4 w-4 text-neutral-400" />
+                <ChevronUp className="h-4 w-4 text-muted-foreground" />
               )}
             </button>
           </div>
@@ -191,7 +191,7 @@ export function ActivityTimeline({
                 {processedEvents.map((event, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-2 p-2 rounded-lg bg-neutral-800/50 border border-neutral-700/50"
+                    className="flex items-start gap-2 p-2 rounded-lg bg-muted/30 border border-border"
                   >
                     <div className={`mt-0.5 ${getEventColor(event.title)}`}>
                       {getEventIcon(event.title)}
@@ -204,13 +204,13 @@ export function ActivityTimeline({
                       >
                         {event.title}
                       </div>
-                      <div className="text-xs text-neutral-400 mt-1">
+                      <div className="text-xs text-muted-foreground mt-1">
                         {isJsonData(event.data) ? (
                           <pre className="whitespace-pre-wrap font-mono text-xs">
                             {formatEventData(event.data)}
                           </pre>
                         ) : (
-                          <div className="prose prose-invert prose-xs">
+                          <div className="prose prose-slate prose-xs dark:prose-invert">
                             <ReactMarkdown>
                               {formatEventData(event.data)}
                             </ReactMarkdown>
@@ -221,15 +221,15 @@ export function ActivityTimeline({
                   </div>
                 ))}
                 {isLoading && (
-                  <div className="flex items-center gap-2 p-2 rounded-lg bg-neutral-800/30 border border-neutral-700/30">
-                    <Loader2 className="h-4 w-4 animate-spin text-blue-400" />
-                    <div className="text-sm text-neutral-400">
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-muted/20 border border-border">
+                    <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
+                    <div className="text-sm text-muted-foreground">
                       AI is processing...
                     </div>
                   </div>
                 )}
                 {processedEvents.length === 0 && !isLoading && (
-                  <div className="text-center py-4 text-neutral-500 text-sm">
+                  <div className="text-center py-4 text-muted-foreground text-sm">
                     Activity will appear here as the AI processes your request
                   </div>
                 )}

@@ -3,11 +3,11 @@
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-// Enhanced markdown components for better styling with consistent dark theme
+// Enhanced markdown components for better styling with theme-aware colors
 export const mdComponents: Partial<Components> = {
   h1: ({ children, ...props }) => (
     <h1
-      className="text-xl font-bold mb-3 text-slate-100 leading-tight"
+      className="text-xl font-bold mb-3 text-emerald-900 dark:text-slate-100 leading-tight"
       {...props}
     >
       {children}
@@ -15,7 +15,7 @@ export const mdComponents: Partial<Components> = {
   ),
   h2: ({ children, ...props }) => (
     <h2
-      className="text-lg font-semibold mb-2 text-slate-100 leading-tight"
+      className="text-lg font-semibold mb-2 text-emerald-900 dark:text-slate-100 leading-tight"
       {...props}
     >
       {children}
@@ -23,7 +23,7 @@ export const mdComponents: Partial<Components> = {
   ),
   h3: ({ children, ...props }) => (
     <h3
-      className="text-base font-medium mb-2 text-slate-100 leading-tight"
+      className="text-base font-medium mb-2 text-emerald-900 dark:text-slate-100 leading-tight"
       {...props}
     >
       {children}
@@ -31,7 +31,7 @@ export const mdComponents: Partial<Components> = {
   ),
   h4: ({ children, ...props }) => (
     <h4
-      className="text-sm font-medium mb-1 text-slate-200 leading-tight"
+      className="text-sm font-medium mb-1 text-emerald-800 dark:text-slate-200 leading-tight"
       {...props}
     >
       {children}
@@ -39,7 +39,7 @@ export const mdComponents: Partial<Components> = {
   ),
   h5: ({ children, ...props }) => (
     <h5
-      className="text-sm font-medium mb-1 text-slate-200 leading-tight"
+      className="text-sm font-medium mb-1 text-emerald-800 dark:text-slate-200 leading-tight"
       {...props}
     >
       {children}
@@ -47,20 +47,20 @@ export const mdComponents: Partial<Components> = {
   ),
   h6: ({ children, ...props }) => (
     <h6
-      className="text-sm font-medium mb-1 text-slate-200 leading-tight"
+      className="text-sm font-medium mb-1 text-emerald-800 dark:text-slate-200 leading-tight"
       {...props}
     >
       {children}
     </h6>
   ),
   p: ({ children, ...props }) => (
-    <p className="mb-2 leading-relaxed text-slate-200 last:mb-0" {...props}>
+    <p className="mb-2 leading-relaxed text-emerald-700 dark:text-slate-100 last:mb-0" {...props}>
       {children}
     </p>
   ),
   ul: ({ children, ...props }) => (
     <ul
-      className="list-disc list-inside mb-2 space-y-1 text-slate-200"
+      className="list-disc list-inside mb-2 space-y-1 text-emerald-700 dark:text-slate-100"
       {...props}
     >
       {children}
@@ -68,20 +68,20 @@ export const mdComponents: Partial<Components> = {
   ),
   ol: ({ children, ...props }) => (
     <ol
-      className="list-decimal list-inside mb-2 space-y-1 text-slate-200"
+      className="list-decimal list-inside mb-2 space-y-1 text-emerald-700 dark:text-slate-100"
       {...props}
     >
       {children}
     </ol>
   ),
   li: ({ children, ...props }) => (
-    <li className="leading-relaxed text-slate-200" {...props}>
+    <li className="leading-relaxed text-emerald-700 dark:text-slate-100" {...props}>
       {children}
     </li>
   ),
   blockquote: ({ children, ...props }) => (
     <blockquote
-      className="border-l-4 border-blue-400 pl-4 py-2 mb-2 bg-slate-800/30 rounded-r italic text-slate-300"
+      className="border-l-4 border-emerald-400 dark:border-blue-400 pl-4 py-2 mb-2 bg-emerald-50 dark:bg-slate-800/30 rounded-r italic text-emerald-700 dark:text-slate-200"
       {...props}
     >
       {children}
@@ -89,7 +89,7 @@ export const mdComponents: Partial<Components> = {
   ),
   code: ({ children, ...props }) => (
     <code
-      className="bg-slate-700 text-slate-200 px-1.5 py-0.5 rounded text-sm font-mono"
+      className="bg-emerald-100 dark:bg-slate-700 text-emerald-800 dark:text-slate-100 px-1.5 py-0.5 rounded text-sm font-mono"
       {...props}
     >
       {children}
@@ -97,7 +97,7 @@ export const mdComponents: Partial<Components> = {
   ),
   pre: ({ children, ...props }) => (
     <pre
-      className="bg-slate-800 text-slate-200 p-3 rounded-lg mb-2 overflow-x-auto border border-slate-700"
+      className="bg-emerald-50 dark:bg-slate-800 text-emerald-800 dark:text-slate-100 p-3 rounded-lg mb-2 overflow-x-auto border border-emerald-200 dark:border-slate-700"
       {...props}
     >
       {children}
@@ -106,7 +106,7 @@ export const mdComponents: Partial<Components> = {
   table: ({ children, ...props }) => (
     <div className="mb-2 overflow-x-auto">
       <table
-        className="min-w-full border-collapse border border-slate-600 text-slate-200"
+        className="min-w-full border-collapse border border-emerald-200 dark:border-slate-600 text-emerald-800 dark:text-slate-100"
         {...props}
       >
         {children}
@@ -115,20 +115,20 @@ export const mdComponents: Partial<Components> = {
   ),
   th: ({ children, ...props }) => (
     <th
-      className="border border-slate-600 bg-slate-700 px-3 py-2 text-left font-medium"
+      className="border border-emerald-200 dark:border-slate-600 bg-emerald-100 dark:bg-slate-700 px-3 py-2 text-left font-medium"
       {...props}
     >
       {children}
     </th>
   ),
   td: ({ children, ...props }) => (
-    <td className="border border-slate-600 px-3 py-2" {...props}>
+    <td className="border border-emerald-200 dark:border-slate-600 px-3 py-2" {...props}>
       {children}
     </td>
   ),
   a: ({ children, href, ...props }) => (
     <a
-      className="text-blue-400 hover:text-blue-300 underline transition-colors"
+      className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 underline transition-colors"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -138,12 +138,12 @@ export const mdComponents: Partial<Components> = {
     </a>
   ),
   strong: ({ children, ...props }) => (
-    <strong className="font-semibold text-slate-100" {...props}>
+    <strong className="font-semibold text-emerald-900 dark:text-slate-100" {...props}>
       {children}
     </strong>
   ),
   em: ({ children, ...props }) => (
-    <em className="italic text-slate-200" {...props}>
+    <em className="italic text-emerald-700 dark:text-slate-100" {...props}>
       {children}
     </em>
   ),

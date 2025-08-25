@@ -33,8 +33,8 @@ export function MessageList({
       <ScrollArea ref={scrollAreaRef} className="flex-1 px-4 py-6">
         <div className="flex items-center justify-center h-full">
           <div className="text-center space-y-3">
-            <div className="text-slate-500 text-lg">💬</div>
-            <p className="text-slate-400 text-sm">
+            <div className="text-muted-foreground text-lg">💬</div>
+            <p className="text-muted-foreground text-sm">
               No messages yet. Start a conversation!
             </p>
           </div>
@@ -66,10 +66,10 @@ export function MessageList({
               <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md border border-emerald-400/30">
                 <Bot className="h-4 w-4 text-white" />
               </div>
-              <div className="flex-1 bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl rounded-tl-sm p-4 shadow-lg">
+              <div className="flex-1 bg-gradient-to-br from-card to-muted border border-border rounded-2xl rounded-tl-sm p-4 shadow-lg">
                 <div className="flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin text-emerald-400" />
-                  <span className="text-sm text-slate-400">
+                  <span className="text-sm text-muted-foreground">
                     Planning your goal...
                   </span>
                 </div>

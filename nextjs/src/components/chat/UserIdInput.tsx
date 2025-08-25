@@ -62,7 +62,9 @@ export function UserIdInput({
   // Handle input blur - validate when they leave the field
   const handleInputBlur = (): void => {
     if (inputValue.trim()) {
-      const validation = validateUserId(inputValue);
+      // Validate using normalized (lowercase) version for consistency
+      const normalizedUserId = inputValue.trim().toLowerCase();
+      const validation = validateUserId(normalizedUserId);
       setIsValid(validation.valid);
       setValidationMessage(validation.message);
       setShouldShowValidation(true);
@@ -71,14 +73,16 @@ export function UserIdInput({
 
   // Handle confirm button click
   const handleConfirm = (): void => {
-    const validation = validateUserId(inputValue);
+    // Normalize to lowercase for case-insensitive handling
+    const normalizedUserId = inputValue.trim().toLowerCase();
+    const validation = validateUserId(normalizedUserId);
     setIsValid(validation.valid);
     setValidationMessage(validation.message);
     setShouldShowValidation(true);
 
     if (validation.valid) {
-      onUserIdChange(inputValue); // Only call this when confirming
-      onUserIdConfirm(inputValue);
+      onUserIdChange(normalizedUserId); // Use normalized (lowercase) user ID
+      onUserIdConfirm(normalizedUserId);
       setIsEditing(false);
       setShouldShowValidation(false);
     }
@@ -127,8 +131,8 @@ export function UserIdInput({
   return (
     <div className={`${className}`}>
       {isEditing ? (
-        <div className="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-2 flex items-center gap-2">
-          <User className="w-4 h-4 text-slate-300 flex-shrink-0" />
+        <div className="bg-card backdrop-blur-sm border border-border rounded-lg p-2 flex items-center gap-2">
+          <User className="w-4 h-4 text-muted-foreground flex-shrink-0" />
           <Input
             data-testid="user-id-input"
             value={inputValue}
@@ -137,8 +141,8 @@ export function UserIdInput({
             }
             onKeyDown={handleKeyPress}
             onBlur={handleInputBlur}
-            placeholder="Enter user ID"
-            className={`w-32 text-xs bg-slate-800 text-slate-100 border-slate-600 focus:border-emerald-500 focus:ring-emerald-500/20 ${
+            placeholder="Enter user ID (case insensitive)"
+            className={`w-32 text-xs bg-background text-foreground border-border focus:border-emerald-500 focus:ring-emerald-500/20 ${
               !isValid ? "border-red-500" : ""
             }`}
             disabled={isLoading}
@@ -164,12 +168,12 @@ export function UserIdInput({
             variant="outline"
             onClick={handleCancel}
             disabled={isLoading}
-            className="h-7 px-2 border-slate-600 text-slate-300 hover:bg-slate-600 hover:text-slate-100"
+            className="h-7 px-2 border-border text-muted-foreground hover:bg-muted hover:text-foreground"
           >
             <X className="w-3 h-3" />
           </Button>
           {shouldShowValidation && !isValid && validationMessage && (
-            <div className="flex items-center gap-1 text-xs text-red-400">
+            <div className="flex items-center gap-1 text-xs text-destructive">
               <AlertCircle className="w-3 h-3" />
               <span className="whitespace-nowrap">{validationMessage}</span>
             </div>
@@ -177,10 +181,10 @@ export function UserIdInput({
         </div>
       ) : (
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400">User:</span>
+          <span className="text-xs text-muted-foreground">User:</span>
           <Badge
             variant="secondary"
-            className="font-mono bg-slate-700/50 text-slate-200 border-slate-600/50 hover:bg-slate-600/50"
+            className="font-mono bg-secondary text-secondary-foreground border-border hover:bg-secondary/80"
           >
             {currentUserId}
           </Badge>
@@ -189,7 +193,7 @@ export function UserIdInput({
             variant="ghost"
             onClick={handleEdit}
             disabled={isLoading}
-            className="text-xs h-6 px-2 text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"
+            className="text-xs h-6 px-2 text-muted-foreground hover:text-foreground hover:bg-muted"
           >
             Edit
           </Button>

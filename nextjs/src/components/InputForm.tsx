@@ -54,8 +54,8 @@ export function InputForm({
           relative flex items-end gap-3 p-3 rounded-2xl border transition-all duration-200
           ${
             isFocused
-              ? "border-emerald-400/50 bg-slate-800/80 shadow-lg shadow-emerald-500/10"
-              : "border-slate-700/50 bg-slate-800/50 hover:border-slate-600/50"
+              ? "border-emerald-400/50 bg-card shadow-lg shadow-emerald-500/10"
+              : "border-border bg-card/50 hover:border-border/80"
           }
           backdrop-blur-sm
         `}
@@ -72,10 +72,10 @@ export function InputForm({
               placeholder={placeholderText}
               rows={1}
               className="
-                resize-none border-0 bg-transparent text-slate-200 placeholder-slate-400
+                resize-none border-0 bg-transparent text-foreground placeholder-muted-foreground
                 focus:ring-0 focus:outline-none focus:border-0 focus:shadow-none
                 min-h-[80px] max-h-48
-                scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-600
+                scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted
                 px-0 py-3
               "
               style={{
@@ -89,7 +89,7 @@ export function InputForm({
 
             {/* Character count for long messages */}
             {inputValue.length > 500 && (
-              <div className="absolute bottom-1 right-1 text-xs text-slate-500 bg-slate-800/80 rounded px-1">
+              <div className="absolute bottom-1 right-1 text-xs text-muted-foreground bg-muted/80 rounded px-1">
                 {inputValue.length}/2000
               </div>
             )}
@@ -104,7 +104,7 @@ export function InputForm({
               h-9 px-4 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700
               text-white border-0 shadow-lg transition-all duration-200
               disabled:opacity-50 disabled:cursor-not-allowed
-              disabled:bg-slate-600 disabled:from-slate-600 disabled:to-slate-600
+              disabled:bg-muted-foreground disabled:from-muted-foreground disabled:to-muted-foreground
               flex items-center gap-2
             "
           >
