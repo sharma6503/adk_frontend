@@ -8,7 +8,7 @@ export function EmptyState(): React.JSX.Element {
       <div className="max-w-5xl w-full space-y-10">
         {/* Greeting */}
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold text-foreground">👋 Hello! I'm your Upskilling Assistant</h1>
+          <h1 className="text-4xl font-bold text-foreground">👋 Hello! I&apos;m your Upskilling Assistant</h1>
           <p className="text-lg text-muted-foreground">
             Here to guide you on your learning journey. Let’s get started — here are the things I can help you with:
           </p>
